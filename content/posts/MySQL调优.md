@@ -22,7 +22,7 @@ MySQL调优是指对MySQL数据库进行性能优化的一系列操作，旨在�
 
 MySQL调优可以从多个方面进行，包括架构调优、MySQL本身调优、硬件调优
 
-<img src="C:\Users\丁元广\AppData\Roaming\Typora\typora-user-images\image-20240530211322891.png" alt="image-20240530211322891" style="zoom: 67%;" />
+![image.png](https://raw.githubusercontent.com/EscapeBearSecond/BlogPic/main/img/202405311752555.png)
 
 越往上成本、难度越来越高，但是带来的收益却是越来越小，所以在优化时，往往优先考虑下方的优化方式
 
