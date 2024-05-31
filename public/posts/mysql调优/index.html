@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="zh-cn">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <title>MySQL调优 // Ding YG</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.126.2">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Ding YG" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="/css/main.min.5b1fcc8902588589c4767187402a3c29f8b8d7a6fdef6d9f8f77045bb0d14fee.css" />
+    
+
+    
+  
+
+
+    
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="MySQL调优">
+  <meta name="twitter:description" content="MyIsam和InnoDB区别
+存储引擎的统计数据是精确的
+什么是MySQL调优 MySQL调优是指对MySQL数据库进行性能优化的一系列操作，旨在提高数据库的运行效率、响应速度和稳定性。简单来说MySQL调优就是将原本执行较慢的SQL语句，通过一些列的优化转换成执行相对较快的SQL语句。
+在MySQL的各种语句中（SELECT UPDATE INSERT DROP），SELECT语句往往是最需要进行调优的
+调优金字塔 MySQL调优可以从多个方面进行，包括架构调优、MySQL本身调优、硬件调优
+越往上成本、难度越来越高，但是带来的收益却是越来越小，所以在优化时，往往优先考虑下方的优化方式
+架构调优
+在进行架构设计时，首先要考虑业务的实际情况，是否可以把不适合数据库做的事情放在其他服务中，如数据仓库、搜索引擎、数据缓存等等 考虑数据库的并发量是否较大，是否采用分布式架构 考虑读的压力是否较大，是否需要读写分离 MySQL调优
+设计合理的表结构 优化SQL语句 添加索引 硬件调优
+这个一般不需要太多的关注，如果是DBA的话，需要自己去学一些操作系统和硬件的知识
+慢查询 什么是慢查询 慢查询就是一条SELECT语句执行需要花费大量时间，这个时间往往不被系统或用户能接受（比如10s钟）
+在MySQL中慢查询就是指执行时间超过MySQL服务器所设定的long_quer_time时间的SELECT语句，所有超过该时间的语句都会被记录在慢查询日志中。
+在MySQL中可以通过show VARIABLES like &#39;%slow_query_time%&#39; set global long_query_time=0来查看和设置慢查询的时间阈值。（设置为0，就表示任何查询都是慢查询，都会被记录在慢查询日志中）
+在MySQL中可以通过show VARIABLES like &#39;slow_query_log&#39;和set GLOBAL slow_query_log=1来查询和开启慢查询日志，如果慢查询日志没有开启，则不会被记录。
+如果希望将没有使用索引的SELECT语句也记录在慢查询日志中，可以通过set VARIABLES &#39;log_queries_not_using_indexes&#39;来开启
+在MySQL中通过show VARIABLES like &#39;%slow_query_log_file%&#39;来查看慢日志所在的磁盘位置
+为何会产生慢查询 其实产生慢查询的最终原因就是因为MySQL服务器要扫描的数据过多，这里可以是因为要扫描的数据行过多，也可能是因为要返回的数据列过多。所以MySQL调优主要是尽可能的让MySQL服务器只扫描自己需要的数据，不去扫描额外的数据，这样就能将MySQL性能发挥到最大。
+几个概念
+响应时间：响应时间是指语句执行所花费的时间，它由服务时间和排队时间两个部分组成 排队时间是指服务器因为等待某些资源而没有真正执行查询的时间，可能是等待IO操作完成，或等待行锁 服务时间是指这条SELECT语句真正执行的时间 扫描行数：MySQL为了找到目标的数据，在服务器中所扫描的记录数 返回行数：最终需要的记录数 显然对于一条SELECT语句，响应时间越短越好，扫描行数与返回行数的比，越小越好，但是最小是1，即扫描多少条数据，返回多少条数据
+如果发现查询需要扫描大量的数据，但是只返回少量的数据，那么可以通过下面几种方法尝试优化：
+使用覆盖索引，把所有需要使用的列都放到索引中，减少回表次数 改变库表结构，例如使用汇总表 这个查询频繁使用，访问大量数据并进行复杂计算 对实时性要求不高，可以接受一定程度的延迟更新汇总数据 如果SELECT较为复杂，可以尝试重写优化，让MySQL优化器能够以更优化的方式执行这个查询 注意：在一条SELECT语句中，除非特殊情况，否则一定要避免使用SELECT * FROM table，最好是按需查询。我自己在刚工作时，就遇到过这种情况，在一张有两万多条记录的表中，有四五条记录的一个字段数据非常大（大约几MB），所以我当时使用SELECT *时，一直报慢查询相关错误，恰巧这个字段我并不需要。但是后面还是有大佬通过一些压缩算法把数据压缩了。
+执行计划 前面说了慢查询会被记录在慢查询日志中，那么如何排查这条慢查询是因何而导致呢？是因为没有使用索引？还是因为扫描的记录数较多？又或是因为等待锁？这时候">
+
+    <meta property="og:url" content="http://localhost:1313/posts/mysql%E8%B0%83%E4%BC%98/">
+  <meta property="og:site_name" content="Ding YG">
+  <meta property="og:title" content="MySQL调优">
+  <meta property="og:description" content="MyIsam和InnoDB区别
+存储引擎的统计数据是精确的
+什么是MySQL调优 MySQL调优是指对MySQL数据库进行性能优化的一系列操作，旨在提高数据库的运行效率、响应速度和稳定性。简单来说MySQL调优就是将原本执行较慢的SQL语句，通过一些列的优化转换成执行相对较快的SQL语句。
+在MySQL的各种语句中（SELECT UPDATE INSERT DROP），SELECT语句往往是最需要进行调优的
+调优金字塔 MySQL调优可以从多个方面进行，包括架构调优、MySQL本身调优、硬件调优
+越往上成本、难度越来越高，但是带来的收益却是越来越小，所以在优化时，往往优先考虑下方的优化方式
+架构调优
+在进行架构设计时，首先要考虑业务的实际情况，是否可以把不适合数据库做的事情放在其他服务中，如数据仓库、搜索引擎、数据缓存等等 考虑数据库的并发量是否较大，是否采用分布式架构 考虑读的压力是否较大，是否需要读写分离 MySQL调优
+设计合理的表结构 优化SQL语句 添加索引 硬件调优
+这个一般不需要太多的关注，如果是DBA的话，需要自己去学一些操作系统和硬件的知识
+慢查询 什么是慢查询 慢查询就是一条SELECT语句执行需要花费大量时间，这个时间往往不被系统或用户能接受（比如10s钟）
+在MySQL中慢查询就是指执行时间超过MySQL服务器所设定的long_quer_time时间的SELECT语句，所有超过该时间的语句都会被记录在慢查询日志中。
+在MySQL中可以通过show VARIABLES like &#39;%slow_query_time%&#39; set global long_query_time=0来查看和设置慢查询的时间阈值。（设置为0，就表示任何查询都是慢查询，都会被记录在慢查询日志中）
+在MySQL中可以通过show VARIABLES like &#39;slow_query_log&#39;和set GLOBAL slow_query_log=1来查询和开启慢查询日志，如果慢查询日志没有开启，则不会被记录。
+如果希望将没有使用索引的SELECT语句也记录在慢查询日志中，可以通过set VARIABLES &#39;log_queries_not_using_indexes&#39;来开启
+在MySQL中通过show VARIABLES like &#39;%slow_query_log_file%&#39;来查看慢日志所在的磁盘位置
+为何会产生慢查询 其实产生慢查询的最终原因就是因为MySQL服务器要扫描的数据过多，这里可以是因为要扫描的数据行过多，也可能是因为要返回的数据列过多。所以MySQL调优主要是尽可能的让MySQL服务器只扫描自己需要的数据，不去扫描额外的数据，这样就能将MySQL性能发挥到最大。
+几个概念
+响应时间：响应时间是指语句执行所花费的时间，它由服务时间和排队时间两个部分组成 排队时间是指服务器因为等待某些资源而没有真正执行查询的时间，可能是等待IO操作完成，或等待行锁 服务时间是指这条SELECT语句真正执行的时间 扫描行数：MySQL为了找到目标的数据，在服务器中所扫描的记录数 返回行数：最终需要的记录数 显然对于一条SELECT语句，响应时间越短越好，扫描行数与返回行数的比，越小越好，但是最小是1，即扫描多少条数据，返回多少条数据
+如果发现查询需要扫描大量的数据，但是只返回少量的数据，那么可以通过下面几种方法尝试优化：
+使用覆盖索引，把所有需要使用的列都放到索引中，减少回表次数 改变库表结构，例如使用汇总表 这个查询频繁使用，访问大量数据并进行复杂计算 对实时性要求不高，可以接受一定程度的延迟更新汇总数据 如果SELECT较为复杂，可以尝试重写优化，让MySQL优化器能够以更优化的方式执行这个查询 注意：在一条SELECT语句中，除非特殊情况，否则一定要避免使用SELECT * FROM table，最好是按需查询。我自己在刚工作时，就遇到过这种情况，在一张有两万多条记录的表中，有四五条记录的一个字段数据非常大（大约几MB），所以我当时使用SELECT *时，一直报慢查询相关错误，恰巧这个字段我并不需要。但是后面还是有大佬通过一些压缩算法把数据压缩了。
+执行计划 前面说了慢查询会被记录在慢查询日志中，那么如何排查这条慢查询是因何而导致呢？是因为没有使用索引？还是因为扫描的记录数较多？又或是因为等待锁？这时候">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-05-31T11:10:21+08:00">
+    <meta property="article:modified_time" content="2024-05-31T11:10:21+08:00">
+    <meta property="article:tag" content="MySQL">
+    <meta property="article:tag" content="数据库">
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="http://localhost:1313/"><img class="app-header-avatar" src="/avatar.jpg" alt="Ding YG" /></a>
+      <span class="app-header-title">Ding YG</span>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/">首页</a>
+              ·  
+          
+          <a class="app-header-menu-item" href="/tags/">标签</a>
+              ·  
+          
+          <a class="app-header-menu-item" href="/about/">关于</a>
+      </nav>
+      <p>一位悄悄成长的程序员</p>
+      <div class="app-header-social">
+        
+          <a href="https://blog.csdn.net/qq_51497975" target="_blank" rel="noreferrer noopener me">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-circle">
+  <title>CSDN</title>
+  <circle cx="12" cy="12" r="10"></circle>
+</svg>
+          </a>
+        
+          <a href="https://github.com/escapebearsecond" target="_blank" rel="noreferrer noopener me">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">MySQL调优</h1>
+      <div class="post-meta">
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          May 31, 2024
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          1 min read
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="http://localhost:1313/tags/mysql/">MySQL</a>
+              <a class="tag" href="http://localhost:1313/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <p>MyIsam和InnoDB区别</p>
+<p>存储引擎的统计数据是精确的</p>
+<h2 id="什么是mysql调优">什么是MySQL调优</h2>
+<p>MySQL调优是指对MySQL数据库进行性能优化的一系列操作，旨在提高数据库的运行效率、响应速度和稳定性。简单来说MySQL调优就是将原本执行较慢的SQL语句，通过一些列的优化转换成执行相对较快的SQL语句。</p>
+<p>在MySQL的各种语句中（SELECT UPDATE INSERT DROP），SELECT语句往往是最需要进行调优的</p>
+<h2 id="调优金字塔">调优金字塔</h2>
+<p>MySQL调优可以从多个方面进行，包括架构调优、MySQL本身调优、硬件调优</p>
+<!-- raw HTML omitted -->
+<p>越往上成本、难度越来越高，但是带来的收益却是越来越小，所以在优化时，往往优先考虑下方的优化方式</p>
+<blockquote>
+<p>架构调优</p>
+</blockquote>
+<ol>
+<li>在进行架构设计时，首先要考虑业务的实际情况，是否可以把不适合数据库做的事情放在其他服务中，如数据仓库、搜索引擎、数据缓存等等</li>
+<li>考虑数据库的并发量是否较大，是否采用分布式架构</li>
+<li>考虑读的压力是否较大，是否需要读写分离</li>
+</ol>
+<blockquote>
+<p>MySQL调优</p>
+</blockquote>
+<ol>
+<li>设计合理的表结构</li>
+<li>优化SQL语句</li>
+<li>添加索引</li>
+</ol>
+<blockquote>
+<p>硬件调优</p>
+</blockquote>
+<p>这个一般不需要太多的关注，如果是DBA的话，需要自己去学一些操作系统和硬件的知识</p>
+<h2 id="慢查询">慢查询</h2>
+<h3 id="什么是慢查询">什么是慢查询</h3>
+<p>慢查询就是一条SELECT语句执行需要花费大量时间，这个时间往往不被系统或用户能接受（比如10s钟）</p>
+<p>在MySQL中慢查询就是指执行时间超过MySQL服务器所设定的<code>long_quer_time</code>时间的SELECT语句，所有超过该时间的语句都会被记录在慢查询日志中。</p>
+<p>在MySQL中可以通过<code>show VARIABLES like '%slow_query_time%'</code> <code>set global long_query_time=0</code>来查看和设置慢查询的时间阈值。（设置为0，就表示任何查询都是慢查询，都会被记录在慢查询日志中）</p>
+<p>在MySQL中可以通过<code>show VARIABLES like 'slow_query_log'</code>和<code>set GLOBAL slow_query_log=1</code>来查询和开启慢查询日志，如果慢查询日志没有开启，则不会被记录。</p>
+<p>如果希望将没有使用索引的SELECT语句也记录在慢查询日志中，可以通过<code>set VARIABLES 'log_queries_not_using_indexes'</code>来开启</p>
+<p>在MySQL中通过<code>show VARIABLES like '%slow_query_log_file%'</code>来查看慢日志所在的磁盘位置</p>
+<h3 id="为何会产生慢查询">为何会产生慢查询</h3>
+<p>其实产生慢查询的最终原因就是因为MySQL服务器要扫描的数据过多，这里可以是因为要扫描的数据行过多，也可能是因为要返回的数据列过多。所以MySQL调优主要是尽可能的让MySQL服务器只扫描自己需要的数据，不去扫描额外的数据，这样就能将MySQL性能发挥到最大。</p>
+<blockquote>
+<p>几个概念</p>
+</blockquote>
+<ol>
+<li>响应时间：响应时间是指语句执行所花费的时间，它由服务时间和排队时间两个部分组成
+<ul>
+<li>排队时间是指服务器因为等待某些资源而没有真正执行查询的时间，可能是等待IO操作完成，或等待行锁</li>
+<li>服务时间是指这条SELECT语句真正执行的时间</li>
+</ul>
+</li>
+<li>扫描行数：MySQL为了找到目标的数据，在服务器中所扫描的记录数</li>
+<li>返回行数：最终需要的记录数</li>
+</ol>
+<p>显然对于一条SELECT语句，响应时间越短越好，扫描行数与返回行数的比，越小越好，但是最小是1，即扫描多少条数据，返回多少条数据</p>
+<p>如果发现查询需要扫描大量的数据，但是只返回少量的数据，那么可以通过下面几种方法尝试优化：</p>
+<ol>
+<li>使用覆盖索引，把所有需要使用的列都放到索引中，减少回表次数</li>
+<li>改变库表结构，例如使用汇总表
+<ul>
+<li>这个查询频繁使用，访问大量数据并进行复杂计算</li>
+<li>对实时性要求不高，可以接受一定程度的延迟更新汇总数据</li>
+</ul>
+</li>
+<li>如果SELECT较为复杂，可以尝试重写优化，让MySQL优化器能够以更优化的方式执行这个查询</li>
+</ol>
+<p><strong>注意</strong>：在一条SELECT语句中，除非特殊情况，否则一定要避免使用<code>SELECT * FROM table</code>，最好是按需查询。我自己在刚工作时，就遇到过这种情况，在一张有两万多条记录的表中，有四五条记录的一个字段数据非常大（大约几MB），所以我当时使用<code>SELECT *</code>时，一直报慢查询相关错误，恰巧这个字段我并不需要。但是后面还是有大佬通过一些压缩算法把数据压缩了。</p>
+<h2 id="执行计划">执行计划</h2>
+<p>前面说了慢查询会被记录在慢查询日志中，那么如何排查这条慢查询是因何而导致呢？是因为没有使用索引？还是因为扫描的记录数较多？又或是因为等待锁？这时候</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

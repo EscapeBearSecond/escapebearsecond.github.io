@@ -1,19 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Tony Blog</title>
-    <link>https://lishuangquan1987.github.io/post/</link>
-    <description>Recent content in Posts on Tony Blog</description>
+    <title>Posts on Ding YG</title>
+    <link>http://localhost:1313/post/</link>
+    <description>Recent content in Posts on Ding YG</description>
     <generator>Hugo</generator>
-    <language>en-us</language>
-    <lastBuildDate>Fri, 31 May 2024 11:10:21 +0800</lastBuildDate>
-    <atom:link href="https://lishuangquan1987.github.io/post/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>MySQL调优</title>
-      <link>https://lishuangquan1987.github.io/post/mysql%E8%B0%83%E4%BC%98/</link>
-      <pubDate>Fri, 31 May 2024 11:10:21 +0800</pubDate>
-      <guid>https://lishuangquan1987.github.io/post/mysql%E8%B0%83%E4%BC%98/</guid>
-      <description></description>
-    </item>
+    <language>zh-CN</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

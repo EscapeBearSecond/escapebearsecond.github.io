@@ -1,5 +1,14 @@
 +++
-title = '{{ replace .File.ContentBaseName "-" " " | title }}'
-date = {{ .Date }}
-draft = true
+title: "{{ replace .TranslationBaseName "-" " " | title }}"
+subtitle: ""
+date: {{ .Date }}
+lastmod: {{ .Date }}
+draft: false
+toc:
+  enable: true
+weight: false
+categories: [""]
+tags: [""]
+
 +++
+
