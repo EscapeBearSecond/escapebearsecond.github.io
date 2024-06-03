@@ -2,48 +2,48 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>http://localhost:1313/en/about/</loc><lastmod>2024-05-31T17:07:16&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+            <loc>https://escapebearsecond.github.io/en/about/</loc><lastmod>2024-05-31T17:07:16&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
                         rel="alternate"
                         hreflang="zh-cn"
-                        href="http://localhost:1313/about/"
+                        href="https://escapebearsecond.github.io/about/"
                         /><xhtml:link
                     rel="alternate"
                     hreflang="en"
-                    href="http://localhost:1313/en/about/"
+                    href="https://escapebearsecond.github.io/en/about/"
                     /></url><url>
-            <loc>http://localhost:1313/en/</loc><lastmod>2024-05-31T17:07:16&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+            <loc>https://escapebearsecond.github.io/en/</loc><lastmod>2024-05-31T17:07:16&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
                         rel="alternate"
                         hreflang="zh-cn"
-                        href="http://localhost:1313/"
+                        href="https://escapebearsecond.github.io/"
                         /><xhtml:link
                     rel="alternate"
                     hreflang="en"
-                    href="http://localhost:1313/en/"
+                    href="https://escapebearsecond.github.io/en/"
                     /></url><url>
-            <loc>http://localhost:1313/en/categories/</loc><lastmod>2024-05-31T17:07:16&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+            <loc>https://escapebearsecond.github.io/en/categories/</loc><lastmod>2024-05-31T17:07:16&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
                         rel="alternate"
                         hreflang="zh-cn"
-                        href="http://localhost:1313/categories/"
+                        href="https://escapebearsecond.github.io/categories/"
                         /><xhtml:link
                     rel="alternate"
                     hreflang="en"
-                    href="http://localhost:1313/en/categories/"
+                    href="https://escapebearsecond.github.io/en/categories/"
                     /></url><url>
-            <loc>http://localhost:1313/en/categories/documentation/</loc><lastmod>2024-05-31T17:07:16&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+            <loc>https://escapebearsecond.github.io/en/categories/documentation/</loc><lastmod>2024-05-31T17:07:16&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
                         rel="alternate"
                         hreflang="zh-cn"
-                        href="http://localhost:1313/categories/documentation/"
+                        href="https://escapebearsecond.github.io/categories/documentation/"
                         /><xhtml:link
                     rel="alternate"
                     hreflang="en"
-                    href="http://localhost:1313/en/categories/documentation/"
+                    href="https://escapebearsecond.github.io/en/categories/documentation/"
                     /></url><url>
-            <loc>http://localhost:1313/en/tags/</loc><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
+            <loc>https://escapebearsecond.github.io/en/tags/</loc><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
                         rel="alternate"
                         hreflang="zh-cn"
-                        href="http://localhost:1313/tags/"
+                        href="https://escapebearsecond.github.io/tags/"
                         /><xhtml:link
                     rel="alternate"
                     hreflang="en"
-                    href="http://localhost:1313/en/tags/"
+                    href="https://escapebearsecond.github.io/en/tags/"
                     /></url></urlset>
