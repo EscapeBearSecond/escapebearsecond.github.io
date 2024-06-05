@@ -4,7 +4,15 @@
         <link>https://escapebearsecond.github.io/posts/</link>
         <description>所有文章 | Ding YG</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>2923780891@qq.com (Ding YG)</managingEditor>
-            <webMaster>2923780891@qq.com (Ding YG)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 03 Jun 2024 20:51:11 &#43;0800</lastBuildDate><atom:link href="https://escapebearsecond.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>2923780891@qq.com (Ding YG)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 04 Jun 2024 14:46:52 &#43;0800</lastBuildDate><atom:link href="https://escapebearsecond.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>MySQL数据库事务</title>
+    <link>https://escapebearsecond.github.io/mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1/</link>
+    <pubDate>Tue, 04 Jun 2024 14:46:52 &#43;0800</pubDate>
+    <author>Ding YG</author>
+    <guid>https://escapebearsecond.github.io/mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1/</guid>
+    <description><![CDATA[什么是事务 事务是数据库管理系统执行过程中的一个逻辑单元，由一个有限的数据库操作序列构成。这些操作要么全部执行，要么全部不执行，是一个不可分割]]></description>
+</item>
+<item>
     <title>Golang实践中的注意事项（持续更新）</title>
     <link>https://escapebearsecond.github.io/golang%E5%AE%9E%E8%B7%B5%E4%B8%AD%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/</link>
     <pubDate>Mon, 03 Jun 2024 20:51:11 &#43;0800</pubDate>
