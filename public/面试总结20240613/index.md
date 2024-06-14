@@ -1,0 +1,264 @@
+# 面试总结20240613
+
+
+### 如果一个结构体的指针类型实现了某个接口，那么该类型的值类型能够调用接口中的方法嘛？
+
+答案是可以的，只是可以用调用方法，但不是说值类型实现了接口
+
+当时自己以为如果是指针类型时间的接口，那么该类型的值类型方法集中没有对应的方法，应该不能调用。但是后面查资料后发现是可以调用的，原因是Go语言方法的定义就是实例value或pointer可以调用方法，编译器会自动转换。
+
+但是不能说值类型实现了该接口，只有指针类型实现了该接口。
+
+如果方法的接收器都是值类型，那么值类型和接口类型都实现了该接口。
+
+```go
+type Human interface {
+	Sleep()
+}
+type Student struct {
+}
+
+func (s *Student) Sleep() {
+}
+func main() {
+
+	s := Student{}
+	s.Sleep()
+
+	s2 := &Student{}
+	s2.Sleep()
+	
+	var h Human
+    // 编译错误：无法将 s (类型 Student) 用作类型 Human 类型未实现 Human，因为 Sleep 方法有指针接收器
+	h = s
+	
+}
+
+```
+
+
+
+
+
+### 代码中如何检查一个类型是否实现了某个接口的全部方法
+
+创建一个接口类型变量、创建一个类型变量，然后把这个类型变量赋值给接口类型变量（多态），如果编译通过，说明已经实现了全部方法
+
+自己是了解多态的，但是当时没往这方面想
+
+
+
+### cap方法
+
+只有slice和channel有cap方法，map没有
+
+当时面试官还问我确不确定，当时脑子一热坚定的说确定，因为想着map底层也有扩容，应该也有cap吧，这下再也不会忘记了
+
+### go1.22 for循环
+
+在 1.22 之前的版本中，for 循环的变量只创建一次，在每个迭代中为这个变量赋予对应的值。由于这个特性，使用起来很容易犯错，一不小心就会导致意想不到的行为。
+
+解决方法是使用新变量或给闭包函数传参（当时没想到第二点）
+
+```go
+package main
+ 
+import (
+	"fmt"
+	"time"
+)
+ 
+func main() {
+	s := []string{"a", "b"}
+	for _, v := range s {
+		go func(v string) {
+			fmt.Print(v)
+		}(v)
+	}
+	time.Sleep(time.Second * 1)
+}
+```
+
+go1.22中，for 循环的每次迭代都会创建新变量，这将会避免上面的问题
+
+go1.22还新增了对整数类型表达式的支持
+
+```go
+package main
+ 
+import "fmt"
+ 
+func main() {
+    for i := range 3 {
+        fmt.Println(i)
+    }
+}
+```
+
+
+
+### singleflight
+
+#### 介绍
+
+singleflight是golang内置的一个包，这个包提供了对重复函数调用的抑制功能，也就是保证并发请求只会有一个实际请求去访问资源，所有并发请求共享实际响应。
+
+通俗的来说就是 singleflight 将相同的并发请求合并成一个请求，进而减少对下层服务的压力，通常用于解决缓存击穿的问题。（当时没想到是缓存击穿的问题，除了可以用singleflight外还可以使用锁机制）
+
+引入：`go get golang.org/x/sync`
+
+
+
+#### 结构
+
+1. call
+
+   ```go
+   type call struct {
+   	wg sync.WaitGroup
+   
+   	// 这些字段在 WaitGroup 结束前写入一次
+   	// 只有在 WaitGroup 结束后才会被读取。
+   	val interface{}
+   	err error
+   
+   	// 这些字段在 WaitGroup 结束前使用 singleflight 互斥锁进行读写
+   	// 在 WaitGroup 结束后读取但不写入。
+   	dups  int
+   	chans []chan<- Result
+   }
+   ```
+
+   
+
+2. Group：Group 代表分成多个工作组，形成一个命名空间，在这个命名空间中，各工作单元可以重复执行。
+
+   ```go
+   type Group struct {
+   	mu sync.Mutex       // 互斥锁
+   	m  map[string]*call // 懒加载
+   }
+   ```
+
+3. Result：Result 保存 Do 方法的结果，以便在通道上传递。做异步处理
+
+   ```go
+   type Result struct {
+   	Val    interface{}
+   	Err    error
+   	Shared bool
+   }
+   ```
+
+   
+
+#### 方法
+
+1. `func (g *Group) Do(key string, fn func() (interface{}, error)) (v interface{}, err error, shared bool) `
+
+   key：请求的唯一标识，相同的key会被视为并发请求
+
+   fn：实际需要执行的函数
+
+   v：fn的返回值
+
+   err：fn的执行错误
+
+   shared：v是否被共享，若存在并发请求，则为true，不存在则为false
+
+   方法作用：对同一个key多次调用时，在第一次调用没有执行完的时候，只会执行一次fn，其他的调用会阻塞等待这次调用返回
+
+2. `func (g *Group) DoChan(key string, fn func() (interface{}, error)) <-chan Result`
+
+   和Do方法类似，不过返回的是chan，也就是同步异步的区别
+
+3. `func (g *Group) Forget(key string)`
+
+   用于通知Group删除某个key，这样后面继续这个key的调用时就不会阻塞等待了。
+
+   
+
+#### demo
+
+```go
+func TestSingleFightExample(t *testing.T) {
+	var group singleflight.Group
+	// 模拟一个并发请求
+	for i := 0; i < 5; i++ {
+		go func(i int) {
+			key := "example"
+			tmp := i // 将tmp放进去
+			val, err, _ := group.Do(key, func() (interface{}, error) {
+				// 模拟一次耗时操作
+				time.Sleep(time.Second)
+				return fmt.Sprintf("result_%d", tmp), nil
+			})
+			if err != nil {
+				fmt.Println("Error:", err)
+			}
+			fmt.Println("Value:", val)
+		}(i)
+	}
+	// 等待所有请求完成
+	time.Sleep(3 * time.Second)
+}
+
+```
+
+结果：这是一个很随机的过程，0～4都有可能，主要看哪个协程最先进来。
+
+```cmd
+Value: result_2
+Value: result_2
+Value: result_2
+Value: result_2
+Value: result_2
+```
+
+
+
+#### 问题
+
+singleflight的本质是对某次函数调用的复用，只执行1次，并将执行期间相同的函数返回相同的结果。由此产生一个问题，如果实际执行的函数出了问题，比如超时，则在此期间的所有调用都会超时，由此需要一些额外的方法来控制。
+
+> 如果超时可以试用select+doChan+context解决
+
+```go
+func TestSingleFightTimeout(t *testing.T) {
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+	go doFly(ctx)
+	time.Sleep(2 * time.Second)
+	cancel() // 2秒后超时
+}
+
+func doFly(ctx context.Context) {
+	var g singleflight.Group
+	key := "example"
+	// 使用 DoChan 结合 select 做超时控制
+	result := g.DoChan(key, func() (interface{}, error) {
+		time.Sleep(5 * time.Second) // 模拟超时
+		return "result", nil
+	})
+	select {
+	case r := <-result:
+		fmt.Println("r", r.Val)
+	case <-ctx.Done():
+		fmt.Println("done")
+		return
+	}
+}
+```
+
+> 请求失败
+
+如果第一个请求失败了，那么后续所有等待的请求都会返回同一个 error。但实际上可以根据下游能支撑的 rps 定时 forget 这个 key，让更多的请求能有机会走到后续逻辑。
+
+```go
+go func() {
+       time.Sleep(100 * time.Millisecond)
+       g.Forget(key)
+   }()
+```
+
+比如1秒内有100个请求过来，正常是第一个请求能执行queryDB，后续99个都会阻塞。增加这个 Forget 之后，每 100ms 就能有一个请求执行 queryDB，相当于是多了几次尝试的机会，相对的也给DB造成了更大的压力，需要根据具体场景进去取舍。 因为有可能前几次是因为DB的抖动导致的查询失败，重试之后就能实现了
+
