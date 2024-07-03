@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>面试 - 分类 - Ding YG</title>
-        <link>https://escapebearsecond.github.io/categories/%E9%9D%A2%E8%AF%95/</link>
+        <link>http://localhost:1313/categories/%E9%9D%A2%E8%AF%95/</link>
         <description>面试 - 分类 - Ding YG</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>2923780891@qq.com (Ding YG)</managingEditor>
-            <webMaster>2923780891@qq.com (Ding YG)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 14 Jun 2024 13:33:21 &#43;0800</lastBuildDate><atom:link href="https://escapebearsecond.github.io/categories/%E9%9D%A2%E8%AF%95/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>2923780891@qq.com (Ding YG)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 14 Jun 2024 13:33:21 &#43;0800</lastBuildDate><atom:link href="http://localhost:1313/categories/%E9%9D%A2%E8%AF%95/" rel="self" type="application/rss+xml" /><item>
     <title>面试总结20240613</title>
-    <link>https://escapebearsecond.github.io/%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%9320240613/</link>
+    <link>http://localhost:1313/%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%9320240613/</link>
     <pubDate>Fri, 14 Jun 2024 13:33:21 &#43;0800</pubDate>
     <author>Ding YG</author>
-    <guid>https://escapebearsecond.github.io/%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%9320240613/</guid>
+    <guid>http://localhost:1313/%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%9320240613/</guid>
     <description><![CDATA[如果一个结构体的指针类型实现了某个接口，那么该类型的值类型能够调用接口中的方法嘛？ 答案是可以的，只是可以用调用方法，但不是说值类型实现了接口]]></description>
 </item>
 </channel>

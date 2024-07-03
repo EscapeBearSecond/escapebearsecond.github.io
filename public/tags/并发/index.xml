@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>并发 - 标签 - Ding YG</title>
-        <link>https://escapebearsecond.github.io/tags/%E5%B9%B6%E5%8F%91/</link>
+        <link>http://localhost:1313/tags/%E5%B9%B6%E5%8F%91/</link>
         <description>并发 - 标签 - Ding YG</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>2923780891@qq.com (Ding YG)</managingEditor>
-            <webMaster>2923780891@qq.com (Ding YG)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 06 Jun 2024 16:02:20 &#43;0800</lastBuildDate><atom:link href="https://escapebearsecond.github.io/tags/%E5%B9%B6%E5%8F%91/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>2923780891@qq.com (Ding YG)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 06 Jun 2024 16:02:20 &#43;0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%B9%B6%E5%8F%91/" rel="self" type="application/rss+xml" /><item>
     <title>Golang并发模型</title>
-    <link>https://escapebearsecond.github.io/golang%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%9E%8B/</link>
+    <link>http://localhost:1313/golang%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%9E%8B/</link>
     <pubDate>Thu, 06 Jun 2024 16:02:20 &#43;0800</pubDate>
     <author>Ding YG</author>
-    <guid>https://escapebearsecond.github.io/golang%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%9E%8B/</guid>
+    <guid>http://localhost:1313/golang%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%9E%8B/</guid>
     <description><![CDATA[深搜 广搜 栈 队列 树 前缀和 双指针 数学公式 正则 滑动窗口]]></description>
 </item>
 </channel>
