@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>操作系统 - 分类 - Ding YG</title>
+        <link>https://escapebearsecond.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</link>
+        <description>操作系统 - 分类 - Ding YG</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>2923780891@qq.com (Ding YG)</managingEditor>
+            <webMaster>2923780891@qq.com (Ding YG)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 14 Jun 2024 13:39:30 &#43;0800</lastBuildDate><atom:link href="https://escapebearsecond.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="self" type="application/rss+xml" /><item>
+    <title>Linux常用命令</title>
+    <link>https://escapebearsecond.github.io/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
+    <pubDate>Fri, 14 Jun 2024 13:39:30 &#43;0800</pubDate>
+    <author>Ding YG</author>
+    <guid>https://escapebearsecond.github.io/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
+    <description><![CDATA[cut cut命令用于从文件中的每一行剪切字节、字符和字段并将这些字节、字符和字段输出。 基本用法 cut [选项参数] filename 说明：默认分割符是制表符 参数说明 选]]></description>
+</item>
+</channel>
+</rss>
