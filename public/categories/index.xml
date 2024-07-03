@@ -1,6 +1,7 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>Categories - 分类 - Ding YG</title>
+<<<<<<< HEAD
         <link>http://localhost:1313/categories/</link>
         <description>Categories - 分类 - Ding YG</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>2923780891@qq.com (Ding YG)</managingEditor>
@@ -26,30 +27,62 @@
     <pubDate>Fri, 14 Jun 2024 13:33:21 &#43;0800</pubDate>
     <author>Ding YG</author>
     <guid>http://localhost:1313/categories/golang/</guid>
+=======
+        <link>https://escapebearsecond.github.io/categories/</link>
+        <description>Categories - 分类 - Ding YG</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>2923780891@qq.com (Ding YG)</managingEditor>
+            <webMaster>2923780891@qq.com (Ding YG)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 14 Jun 2024 13:33:21 &#43;0800</lastBuildDate><atom:link href="https://escapebearsecond.github.io/categories/" rel="self" type="application/rss+xml" /><item>
+    <title>Golang</title>
+    <link>https://escapebearsecond.github.io/categories/golang/</link>
+    <pubDate>Fri, 14 Jun 2024 13:33:21 &#43;0800</pubDate>
+    <author>Ding YG</author>
+    <guid>https://escapebearsecond.github.io/categories/golang/</guid>
+>>>>>>> 6b55eafe9951ede3b3458324068d94f85ccc5c05
     <description><![CDATA[]]></description>
 </item>
 <item>
     <title>面试</title>
+<<<<<<< HEAD
     <link>http://localhost:1313/categories/%E9%9D%A2%E8%AF%95/</link>
     <pubDate>Fri, 14 Jun 2024 13:33:21 &#43;0800</pubDate>
     <author>Ding YG</author>
     <guid>http://localhost:1313/categories/%E9%9D%A2%E8%AF%95/</guid>
+=======
+    <link>https://escapebearsecond.github.io/categories/%E9%9D%A2%E8%AF%95/</link>
+    <pubDate>Fri, 14 Jun 2024 13:33:21 &#43;0800</pubDate>
+    <author>Ding YG</author>
+    <guid>https://escapebearsecond.github.io/categories/%E9%9D%A2%E8%AF%95/</guid>
+>>>>>>> 6b55eafe9951ede3b3458324068d94f85ccc5c05
     <description><![CDATA[]]></description>
 </item>
 <item>
     <title>数据库</title>
+<<<<<<< HEAD
     <link>http://localhost:1313/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
     <pubDate>Tue, 04 Jun 2024 14:46:52 &#43;0800</pubDate>
     <author>Ding YG</author>
     <guid>http://localhost:1313/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
+=======
+    <link>https://escapebearsecond.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+    <pubDate>Tue, 04 Jun 2024 14:46:52 &#43;0800</pubDate>
+    <author>Ding YG</author>
+    <guid>https://escapebearsecond.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
+>>>>>>> 6b55eafe9951ede3b3458324068d94f85ccc5c05
     <description><![CDATA[]]></description>
 </item>
 <item>
     <title>文档</title>
+<<<<<<< HEAD
     <link>http://localhost:1313/categories/documentation/</link>
     <pubDate>Mon, 01 Jan 0001 00:00:00 &#43;0000</pubDate>
     <author>Ding YG</author>
     <guid>http://localhost:1313/categories/documentation/</guid>
+=======
+    <link>https://escapebearsecond.github.io/categories/documentation/</link>
+    <pubDate>Mon, 01 Jan 0001 00:00:00 &#43;0000</pubDate>
+    <author>Ding YG</author>
+    <guid>https://escapebearsecond.github.io/categories/documentation/</guid>
+>>>>>>> 6b55eafe9951ede3b3458324068d94f85ccc5c05
     <description><![CDATA[]]></description>
 </item>
 </channel>

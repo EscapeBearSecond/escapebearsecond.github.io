@@ -1,7 +1,11 @@
 {
 	"version": 3,
 	"file": "style.min.css",
+<<<<<<< HEAD
 	"sourceRoot": "C:/Users/bear/Documents/个人/blog",
+=======
+	"sourceRoot": "C:/Users/丁元广/project/blog",
+>>>>>>> 6b55eafe9951ede3b3458324068d94f85ccc5c05
 	"sources": [
 		"themes/LoveIt/assets/css/style.scss",
 		"themes/LoveIt/assets/lib/normalize/normalize.css",

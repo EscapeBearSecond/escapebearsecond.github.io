@@ -1,6 +1,7 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>数据库 - 分类 - Ding YG</title>
+<<<<<<< HEAD
         <link>http://localhost:1313/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
         <description>数据库 - 分类 - Ding YG</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>2923780891@qq.com (Ding YG)</managingEditor>
@@ -10,14 +11,32 @@
     <pubDate>Tue, 04 Jun 2024 14:46:52 &#43;0800</pubDate>
     <author>Ding YG</author>
     <guid>http://localhost:1313/mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1/</guid>
+=======
+        <link>https://escapebearsecond.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+        <description>数据库 - 分类 - Ding YG</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>2923780891@qq.com (Ding YG)</managingEditor>
+            <webMaster>2923780891@qq.com (Ding YG)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 04 Jun 2024 14:46:52 &#43;0800</lastBuildDate><atom:link href="https://escapebearsecond.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="self" type="application/rss+xml" /><item>
+    <title>MySQL数据库事务</title>
+    <link>https://escapebearsecond.github.io/mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1/</link>
+    <pubDate>Tue, 04 Jun 2024 14:46:52 &#43;0800</pubDate>
+    <author>Ding YG</author>
+    <guid>https://escapebearsecond.github.io/mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1/</guid>
+>>>>>>> 6b55eafe9951ede3b3458324068d94f85ccc5c05
     <description><![CDATA[什么是事务 事务是数据库管理系统执行过程中的一个逻辑单元，由一个有限的数据库操作序列构成。这些操作要么全部执行，要么全部不执行，是一个不可分割]]></description>
 </item>
 <item>
     <title>MySQL调优</title>
+<<<<<<< HEAD
     <link>http://localhost:1313/mysql%E8%B0%83%E4%BC%98/</link>
     <pubDate>Fri, 31 May 2024 11:10:21 &#43;0800</pubDate>
     <author>Ding YG</author>
     <guid>http://localhost:1313/mysql%E8%B0%83%E4%BC%98/</guid>
+=======
+    <link>https://escapebearsecond.github.io/mysql%E8%B0%83%E4%BC%98/</link>
+    <pubDate>Fri, 31 May 2024 11:10:21 &#43;0800</pubDate>
+    <author>Ding YG</author>
+    <guid>https://escapebearsecond.github.io/mysql%E8%B0%83%E4%BC%98/</guid>
+>>>>>>> 6b55eafe9951ede3b3458324068d94f85ccc5c05
     <description><![CDATA[什么是MySQL调优 MySQL调优是指对MySQL数据库进行性能优化的一系列操作，旨在提高数据库的运行效率、响应速度和稳定性。简单来说MyS]]></description>
 </item>
 </channel>

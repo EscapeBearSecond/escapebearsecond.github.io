@@ -61,4 +61,8 @@ Disallow: /
 User-agent: ZoominfoBot
 Disallow: /
 
+<<<<<<< HEAD
 Sitemap: http://localhost:1313/sitemap.xml
+=======
+Sitemap: https://escapebearsecond.github.io/sitemap.xml
+>>>>>>> 6b55eafe9951ede3b3458324068d94f85ccc5c05
